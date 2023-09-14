@@ -22,7 +22,7 @@ function Navigation() {
     }
 
     return (
-        <div className="py-4 mb-2 fixed top-0 left-0 bg-white w-full shadow-md">
+        <div className="py-4 mb-2 sticky top-0 left-0 bg-white w-full shadow-md">
             <div className="w-11/12 mx-auto flex gap-4 items-center">
                 <div className="max-w-full overflow-hidden relative">
                     <div className="relative">
