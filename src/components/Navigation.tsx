@@ -40,7 +40,7 @@ function Navigation() {
                                     clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <ul className="navigation flex gap-2 gap-x-4 md:gap-x-8 flex-nowrap font-[500] text-black/[0.6] text-[13px] overflow-x-scroll text-center whitespace-nowrap scroll relative w-[75%] md:w-[90%] mx-auto transition duration-300 ease-in-out scroll-smooth">
+                        <ul className="navigation flex gap-2 gap-x-4 md:gap-x-8 flex-nowrap font-[500] text-black/[0.6] text-[13px] overflow-x-hidden text-center whitespace-nowrap scroll relative w-[75%] md:w-[90%] mx-auto transition duration-300 ease-in-out scroll-smooth">
                             <a href="/">
                                 <li className="py-1 relative group">
                                     <img src="/icons/all.png" alt="" className="w-[25px] h-[25px] mx-auto object-cover" />

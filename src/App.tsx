@@ -23,7 +23,7 @@ function AppContent() {
 
   return (
     <>
-      {!isProductIDRoute && pathname !== '/' && <Navigation />} {/* Render Navigation if not on a product ID route or index */}
+      {!isProductIDRoute && (pathname !== '/' || pathname === '/') && <Navigation />} {/* Render Navigation if not on a product ID route or index */}
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/product/:id" element={<Detail />} />
