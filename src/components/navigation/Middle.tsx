@@ -87,7 +87,7 @@ function Middle({ supabase }: any) {
                     </div>
                 </div> */}
                 <div className="items-center gap-4 justify-end flex">
-                    <Link to="/cart/">
+                    <Link to="/cart">
                         <div className="flex items-center relative">
                             <div
                                 className="text-[13px] cursor-pointer bg-[#FF385C] text-white w-[25px] h-[25px] flex items-center justify-center absolute top-[-10px] right-[-10px] rounded-full">
