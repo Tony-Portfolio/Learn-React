@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 
-const Register = ({ supabase }) => {
+const Register = ({ supabase }: any) => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ const Register = ({ supabase }) => {
 
     const [passwordError, setPasswordError] = useState('');
 
-    const handleChange = (e) => {
+    const handleChange = (e: any) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
@@ -21,7 +21,7 @@ const Register = ({ supabase }) => {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
 
         // Validate password length
@@ -55,7 +55,7 @@ const Register = ({ supabase }) => {
                 });
                 // Redirect or perform other actions upon successful registration
             }
-        } catch (error) {
+        } catch (error: any) {
             // Handle any unexpected errors
             console.error('Unexpected Error:', error.message);
         }

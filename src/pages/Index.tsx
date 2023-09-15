@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Item from '../components/Item';
 
 // Define an interface for the product data

@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+// import React from "react";
+import { useLocation } from "react-router-dom";
 import Middle from "./navigation/Middle";
 import Bottom from "./navigation/Bottom";
 
-function Navigation({supabase}: any) {
+function Navigation({ supabase }: any) {
     const location = useLocation();
     const isProductPage = location.pathname.match(/^\/product\/\d+$/);
-    const isCart = location == "/cart";
+    const isCart = location.pathname === "/cart";
 
-    // Conditionally render the Bottom component based on URL
     const renderBottom = !(isProductPage || isCart);
 
     return (

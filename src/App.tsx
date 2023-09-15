@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect } from "react"
+import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { createClient } from "@supabase/supabase-js";
 import Index from './pages/Index';
 import Detail from './pages/Detail';
@@ -24,9 +25,30 @@ function App() {
 
 function AppContent() {
   const supabase = createClient(apiUrl, apiKey);
-
+  const navigate = useNavigate();
   const location = useLocation();
-  console.log("LOCATION :", location)
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        // Define an array of allowed routes for unauthenticated users
+        const allowedRoutes = ["/", "/register", "/login"];
+
+        // Check if the current route is in the allowedRoutes array
+        if (!allowedRoutes.includes(location.pathname)) {
+          // Check if the current route matches the /product/category/ pattern
+          const categoryPattern = /^\/product\/category\//;
+          if (!categoryPattern.test(location.pathname)) {
+            // Redirect to login if not authenticated and not on allowed routes
+            navigate("/login");
+          }
+        }
+      }
+    };
+
+    checkUser();
+  }, [supabase, location, navigate]);
 
   // Check if the path is /login or /register
   const isLoginPage = location.pathname === "/login";
@@ -34,6 +56,7 @@ function AppContent() {
 
   // Render the Navigation component unless on /login or /register
   const renderNavigation = !(isLoginPage || isRegisterPage);
+
 
   return (
     <>

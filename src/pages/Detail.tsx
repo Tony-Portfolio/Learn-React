@@ -49,7 +49,7 @@ function Detail({ supabase }: any) {
 
     const [quantity, setQuantity] = useState(1);
 
-    const handleQuantityChange = (event) => {
+    const handleQuantityChange = (event: any) => {
         const newQuantity = parseInt(event.target.value);
         if (newQuantity >= 1 && newQuantity <= product.stock) {
             setQuantity(newQuantity);
@@ -63,7 +63,7 @@ function Detail({ supabase }: any) {
         const submissionData = {
             email: user.email,
             id_product: parseInt(product.id),
-            quantity: parseInt(quantity)
+            quantity: quantity
         };
         console.log(submissionData);
 
@@ -85,12 +85,11 @@ function Detail({ supabase }: any) {
                 // Row with the same email, id_product, and quantity exists, update the quantity
                 const existingId = existingData.id;
                 const existingQuantity = existingData.quantity;
-                const newQuantity = parseInt(existingQuantity) + parseInt(quantity);
-                console.log(existingData)
+                const newQuantity: number = parseInt(existingQuantity) + quantity;
 
                 const { data, error: updateError } = await supabase
                     .from('cart')
-                    .update({ quantity: parseInt(newQuantity) })
+                    .update({ quantity: newQuantity })
                     .eq('id', existingId)
                     .select();
 

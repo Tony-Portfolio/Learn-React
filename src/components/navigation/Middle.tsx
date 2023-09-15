@@ -45,6 +45,7 @@ function Middle({ supabase }: any) {
                     timer: 3000,
                     willClose: async () => {
                         let { error } = await supabase.auth.signOut();
+                        if(error){}
                         navigate("/");
                     }
                 }

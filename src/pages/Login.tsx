@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -31,6 +31,9 @@ const Login = ({ supabase }: any) => {
                 setError('Incorrect username or password'); // Set the error message
                 return;
             }
+            else{
+                console.log(data);
+            }
 
             // Reset the error message on successful login
             setError('');
@@ -45,7 +48,7 @@ const Login = ({ supabase }: any) => {
                 },
                 showConfirmButton: false,
             });
-        } catch (error) {
+        } catch (error: any) {
             console.error('Unexpected Error:', error.message);
         }
     };
