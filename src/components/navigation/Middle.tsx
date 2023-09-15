@@ -59,7 +59,7 @@ function Middle({ supabase }: any) {
     return (
         <div className="w-11/12 mx-auto flex flex-col gap-4">
             <div className="flex items-center justify-between py-4 gap-4">
-                <div className="hidden md:block">
+                <div className="">
                     <Link to="/">
                         <img src="/Shopify_logo.svg" alt="" className="w-[100px] shrink" />
                     </Link>
