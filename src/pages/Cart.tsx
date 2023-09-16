@@ -54,8 +54,8 @@ const Cart = ({ supabase }: any) => {
     }, [product, listProduct]);
 
     return (
-        <div className="w-full max-w-[1200px] mx-auto my-4 min-h-screen overflow-hidden h-[400px]">
-            <div className="md:mx-auto md:my-4 md:my-14 flex flex-col md:gap-16 w-full px-4 md:px-14 md:px-0 min-h-screen">
+        <div className="w-full max-w-[1200px] mx-auto my-4 min-h-screen overflow-hidden">
+            <div className="md:mx-auto md:my-4 flex flex-col w-full px-4 md:px-14 min-h-screen">
                 <div className="w-full flex items-center justify-center text-center md:relative sticky top-0 left-0 w-full bg-white p-4 md:bg-transparent md:p-0">
                     <h4 className="font-[500] text-lg md:text-2xl flex justify-center md:justify-start items-center gap-2 relative md:text-left text-center w-full block">
                         Keranjang Anda
@@ -70,22 +70,20 @@ const Cart = ({ supabase }: any) => {
                 </div>
                 <div className="flex gap-4 md:gap-20 items-start justify-start md:flex-row flex-col-reverse my-4">
                     <div className="md:p-6 md:border-[1px] md:border-black/[0.1] rounded-lg flex flex-col gap-6 w-full mx-auto md:sticky top-[20px]">
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-8">
                             <h4 className="font-[600] text-xl text-black/[0.8] text-left">Detail pemesanan & Perincian harga</h4>
                             {isLoading ? (
-                                // Render loading skeleton here
                                 <LoadingSkeleton />
                             ) : (
                                 product.map((item: any) => {
-                                    const itemList: any = listProduct[item.id_product];
+                                    const itemList: any = listProduct.find((result: any) => result.id === item.id_product);
 
                                     if (!itemList) {
-                                        // Product not found, you can handle this case accordingly
                                         return null;
                                     }
 
                                     return (
-                                        <div key={item.id} className="flex items-end justify-between relative">
+                                        <div key={item.id} className="flex items-start justify-between relative">
                                             <div className="flex gap-2">
                                                 <div className="mx-4">
                                                     <input type="checkbox" className="scale-[1.4]" />
@@ -98,24 +96,22 @@ const Cart = ({ supabase }: any) => {
                                                     <p className="font-[500] text-[15px]">${itemList.price}.00 x {item.quantity}</p>
                                                 </div>
                                             </div>
-                                            <p className="absolute top-0 right-[0px] font-[500] text-[16px] underline text-red-500 cursor-pointer">
-                                                Hapus
-                                            </p>
                                             <p className="font-[500] text-[15px] whitespace-nowrap">${parseInt(itemList.price) * parseInt(item.quantity)}.00</p>
+                                            <p className="absolute bottom-0 right-[0px] font-[500] text-[16px] underline text-red-500 cursor-pointer">
+                                                Remove
+                                            </p>
                                         </div>
                                     );
                                 })
                             )}
                         </div>
                         <hr />
-                        {/* Check if cart is empty */}
                         <div>
                             <div className="font-[13px] font-[600] flex items-center justify-between text-black/[0.8]">
                                 <h4>Total (<span className="underline">USD</span>)</h4>
                                 <p>$200.00</p>
                             </div>
                         </div>
-                        {/* End of cart empty check */}
                         <button className="bg-gradient-to-r from-[#E92153] to-[#DE105E] w-full p-3 px-6 rounded-md text-white text-center text-[15px] font-bold">
                             Cart
                         </button>

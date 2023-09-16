@@ -124,7 +124,7 @@ function Middle({ supabase }: any) {
                                     <p className="hover:bg-black/[0.03] py-3 text-[15px] px-4 cursor-pointer">Profile</p>
                                 </Link> */}
                                 <hr />
-                                <Link to="/order/" onClick={toggleMenu}>
+                                <Link to="/cart" onClick={toggleMenu}>
                                     <p className="hover:bg-black/[0.03] py-3 text-[15px] px-4 cursor-pointer">Cart</p>
                                 </Link>
                                 <hr />
