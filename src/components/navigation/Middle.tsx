@@ -91,7 +91,7 @@ function Middle({ supabase }: any) {
                         <div className="flex items-center relative">
                             <div
                                 className="text-[13px] cursor-pointer bg-[#FF385C] text-white w-[25px] h-[25px] flex items-center justify-center absolute top-[-10px] right-[-10px] rounded-full">
-                                <p>2</p>
+                                <p>?</p>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" className="w-8 h-8">
@@ -107,7 +107,7 @@ function Middle({ supabase }: any) {
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                                 </svg>
                             </div>
-                            <img src="picture" className="w-[40px] h-[40px] rounded-full object-cover object-top" />
+                            <img src="/profile.png" className="w-[40px] h-[40px] rounded-full object-cover object-top" />
                         </div>
                         <div
                             className={`absolute bg-white top-[120%] right-0 w-[240px] z-[40] shadow-lg shadow-black/20 rounded-lg flex flex-col gap-3 ${isMenuOpen ? 'block' : 'hidden'}`}>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation, Link } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import Swal from 'sweetalert2';
 import "./detail.css";
 
@@ -130,6 +130,30 @@ function Detail({ supabase }: any) {
         }, 500);
     }, [product])
 
+    const shareLink = () => {
+        const tempInput = document.createElement("input");
+
+        const url = window.location.href;
+
+        tempInput.value = url;
+
+        document.body.appendChild(tempInput);
+
+        tempInput.select();
+
+        document.execCommand("copy");
+
+        document.body.removeChild(tempInput);
+
+        Swal.fire({
+            icon: 'info',
+            title: 'Link Copied!',
+            text: 'Share the link to your friends',
+            timer: 2000,
+            showConfirmButton: false,
+        });
+    }
+
 
 
     return (
@@ -166,7 +190,7 @@ function Detail({ supabase }: any) {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <div className="flex items-center text-[14px] font-[500] gap-2 cursor-pointer">
+                                    <div className="flex items-center text-[14px] font-[500] gap-2 cursor-pointer" onClick={shareLink}>
                                         <i className="fa-solid fa-arrow-up-from-bracket"></i>
                                         <p className="underline">Bagikan</p>
                                     </div>
@@ -202,7 +226,7 @@ function Detail({ supabase }: any) {
                                     <h3 className="font-bold text-3xl md:hidden">{product.title}</h3>
                                     <h3 className="font-semibold text-3xl md:block hidden">{product.title}</h3>
 
-                                    <div className="bg-white rounded-lg shadow-md p-4 mt-4">
+                                    <div className="bg-white rounded-lg md:p-4 mt-4">
                                         <p className="text-lg text-gray-700 mb-4">{product.description}</p>
 
                                         <div className="flex flex-col md:flex-row justify-between">
@@ -229,8 +253,8 @@ function Detail({ supabase }: any) {
                                         </div>
                                     </div>
                                 </div>
-                                <hr className="my-8 w-full md:hidden block" />
-                                <div className="md:shadow-lg md:p-4 p-0 rounded w-full shrink-0">
+                                <hr className="my-8 w-full block" />
+                                <div className="p-0 rounded w-full shrink-0">
                                     <div className="rounded font-bold flex flex-col gap-4 md:gap-0">
                                         <div className="md:p-2 flex flex-col gap-2">
                                             <div className="flex items-center gap-2">
@@ -264,7 +288,7 @@ function Detail({ supabase }: any) {
                                                     type="number"
                                                     min="1"
                                                     max={product.stock}
-                                                    className="text-center w-16 h-12 border-2 border-black/[0.1] rounded"
+                                                    className="text-center h-12 border-2 border-black/[0.1] rounded w-full"
                                                     value={quantity}
                                                     onChange={handleQuantityChange}
                                                 />
@@ -300,7 +324,7 @@ function Detail({ supabase }: any) {
                                 </div>
                             </div>
                         </section>
-                        <section className="mx-0 sm:mx-4">
+                        <section className="mx-0 sm:mx-4 mt-8">
                             <div className="md:p-0 p-4">
                                 <hr className="my-4" />
                                 <div className="">
