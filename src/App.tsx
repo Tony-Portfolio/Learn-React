@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { Route, Routes, useLocation, useNavigate, HashRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { createClient } from "@supabase/supabase-js";
 import Index from './pages/Index';
 import Detail from './pages/Detail';
@@ -17,9 +17,9 @@ const apiKey = REACT_APP_SUPABASE_KEY || "";
 
 function App() {
   return (
-    <HashRouter>
+    <Router>
       <AppContent />
-    </HashRouter>
+    </Router>
   );
 }
 
