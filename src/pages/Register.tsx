@@ -101,7 +101,7 @@ const Register = ({ supabase }: any) => {
                         <div>
                             <button
                                 type="submit"
-                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#FF385C] hover:bg-[#e42c4d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#e42c4d]"
                             >
                                 Register
                             </button>
@@ -111,7 +111,7 @@ const Register = ({ supabase }: any) => {
                 <div className="bg-gray-50 px-6 py-4">
                     <p className="text-sm text-gray-500">
                         Already have an account?{' '}
-                        <Link to="/login" className="text-indigo-600 hover:underline">
+                        <Link to="/login" className="text-[#FF385C] hover:underline">
                             Log in here
                         </Link>
                     </p>
