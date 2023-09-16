@@ -110,7 +110,7 @@ function Middle({ supabase }: any) {
                             <img src="picture" className="w-[40px] h-[40px] rounded-full object-cover object-top" />
                         </div>
                         <div
-                            className={`absolute bg-white top-[120%] right-0 py-2 w-[240px] z-[40] shadow-lg shadow-black/20 rounded-lg flex flex-col gap-3 ${isMenuOpen ? 'block' : 'hidden'}`}>
+                            className={`absolute bg-white top-[120%] right-0 w-[240px] z-[40] shadow-lg shadow-black/20 rounded-lg flex flex-col gap-3 ${isMenuOpen ? 'block' : 'hidden'}`}>
                             <div className={`${isUserLogin ? 'hidden' : 'block'}`}>
                                 <Link to="/register">
                                     <p className="hover:bg-black/[0.03] py-3 text-[15px] px-4 cursor-pointer">Sign Up</p>
@@ -123,17 +123,17 @@ function Middle({ supabase }: any) {
                                 {/* <Link to="/user/profile" onClick={toggleMenu}>
                                     <p className="hover:bg-black/[0.03] py-3 text-[15px] px-4 cursor-pointer">Profile</p>
                                 </Link> */}
-                                <hr />
+                                {/* <hr /> */}
                                 <Link to="/cart" onClick={toggleMenu}>
                                     <p className="hover:bg-black/[0.03] py-3 text-[15px] px-4 cursor-pointer">Cart</p>
                                 </Link>
                                 <hr />
-                                <Link to="/" onClick={() => {
+                                <p onClick={() => {
                                     logout()
                                     toggleMenu()
                                 }}>
                                     <p className="hover:bg-black/[0.03] py-3 text-[15px] px-4 cursor-pointer">Logout</p>
-                                </Link>
+                                </p>
                             </div>
                         </div>
                     </div>
