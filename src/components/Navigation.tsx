@@ -11,7 +11,7 @@ function Navigation({ supabase }: any) {
     const renderBottom = !(isProductPage || isCart);
 
     return (
-        <div className="py-2 mb-4 sticky top-0 left-0 bg-white w-full shadow-md z-10">
+        <div className="mb-4 sticky top-0 left-0 bg-white w-full shadow-md z-10">
             {<Middle supabase={supabase} />}
             {renderBottom && <Bottom />}
         </div>

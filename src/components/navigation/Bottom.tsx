@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Bottom() {
     const [category, setcategory] = useState([]);
-    
+    const location = useLocation();
+
 
     useEffect(() => {
         fetch('https://dummyjson.com/products/categories')
@@ -20,6 +21,16 @@ function Bottom() {
         var scroll: any = document.querySelector(".scroll");
         console.log("running");
         scroll.scrollLeft += direction;
+    }
+
+    const getCurrentUrl = () => {
+        const url = location.pathname;
+
+        const segments = url.split("/");
+
+        const lastName = segments[segments.length - 1];
+
+        return lastName;
     }
 
     return (
@@ -46,19 +57,20 @@ function Bottom() {
                                 <img src="/icons/all.png" alt="" className="w-[25px] h-[25px] mx-auto object-cover" />
                                 <p className="py-2 w-[25px]">All</p>
                                 <div
-                                    className="absolute bottom-0 left-0 w-full border-[1px] border-black/[0.1] opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                                    className="absolute bottom-0 left-0 w-full border-[1px] border-[#FF385C] opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
                                 </div>
                             </li>
                         </Link>
                         {category.map((result) => (
                             <Link to={`/product/category/${result}`} key={result}>
                                 <li className="py-1 relative group">
-                                    <img src={`/icons/${result}.png`} alt="" className="w-[28px] h-[25px] mx-auto object-cover" />
+                                    <img src={`/icons/${result}.png`} alt="" className={`w-[28px] h-[25px] mx-auto object-cover grayscale-0 ${getCurrentUrl() === result ? 'grayscale-0' : 'grayscale-1'}`} />
                                     <p className="py-2">{result}</p>
-                                    <div className="absolute bottom-0 left-0 w-full border-[1px] border-black/[0.1] opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out"></div>
+                                    <div className={`absolute bottom-0 left-0 w-full opacity-1 border-[1px] border-[#FF385C] transition duration-300 ease-in-out ${getCurrentUrl() === result ? 'opacity-1' : 'opacity-0'}`}></div>
                                 </li>
                             </Link>
                         ))}
+
                     </ul>
                 </div>
             </div>

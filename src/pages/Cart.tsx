@@ -87,7 +87,7 @@ const Cart = ({ supabase }: any) => {
     const removeItem = (id: number) => {
         Swal.fire({
             icon: "question",
-            title: "Delete Item",
+            title: "Remove Item",
             text: "remove this item from your cart ?",
             showConfirmButton: true,
             confirmButtonText: "Delete",
@@ -140,13 +140,13 @@ const Cart = ({ supabase }: any) => {
                 <div className="w-full flex items-center justify-center text-center md:relative sticky top-0 left-0 w-full bg-white p-4 md:bg-transparent md:p-0">
                     <h4 className="font-[500] text-lg md:text-2xl flex justify-center md:justify-start items-center gap-2 relative md:text-left text-center w-full block">
                         Cart
-                        <Link to="/">
+                        <p onClick={() => {history.back()}} className="cursor-pointer">
                             <span className="absolute top-[50%] translate-y-[-50%] left-[10px] md:left-[-40px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                                 </svg>
                             </span>
-                        </Link>
+                        </p>
                     </h4>
                 </div>
                 <div className="flex gap-4 md:gap-20 items-start justify-start md:flex-row flex-col-reverse my-4">

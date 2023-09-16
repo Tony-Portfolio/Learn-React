@@ -21,7 +21,7 @@ function Index() {
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        fetch('https://dummyjson.com/products')
+        fetch('https://dummyjson.com/products?limit=100')
             .then((response) => response.json())
             .then((data) => {
                 setProducts(data.products);

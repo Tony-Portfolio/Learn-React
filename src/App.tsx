@@ -8,6 +8,7 @@ import Navigation from './components/Navigation';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Cart from './pages/Cart';
+import Footer from "./components/Footer";
 
 const REACT_APP_SUPABASE_URL = "https://vnuqwzaoqxrmtfpumnhy.supabase.co";
 const REACT_APP_SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZudXF3emFvcXhybXRmcHVtbmh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTMwMjA5OTYsImV4cCI6MjAwODU5Njk5Nn0.Z3EAQypKZg-MTjLbTuQKF6Q_DZeVMGo_WPTQtQ9dAIY";
@@ -69,6 +70,7 @@ function AppContent() {
         <Route path="/register" element={<Register supabase={supabase} />}></Route>
         <Route path="/cart" element={<Cart supabase={supabase} />}></Route>
       </Routes>
+      <Footer />
     </>
   );
 }

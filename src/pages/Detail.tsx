@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 import "./detail.css";
 
-// Define an interface for the product data
 interface Product {
     id: number;
     title: string;
@@ -69,7 +68,6 @@ function Detail({ supabase }: any) {
         console.log(submissionData);
 
         if (user) {
-            // Check if a row with the same email, id_product, and quantity already exists
             const { data: existingData, error } = await supabase
                 .from('cart')
                 .select('id, quantity')
@@ -83,7 +81,6 @@ function Detail({ supabase }: any) {
             }
 
             if (existingData) {
-                // Row with the same email, id_product, and quantity exists, update the quantity
                 const existingId = existingData.id;
                 const existingQuantity = existingData.quantity;
                 const newQuantity: number = parseInt(existingQuantity) + quantity;
@@ -103,7 +100,6 @@ function Detail({ supabase }: any) {
                 }
             } else {
                 console.log("yay")
-                // Row with the same email, id_product, and quantity doesn't exist, insert a new row
                 const { error: insertError } = await supabase
                     .from('cart')
                     .insert([submissionData]);
@@ -132,17 +128,11 @@ function Detail({ supabase }: any) {
 
     const shareLink = () => {
         const tempInput = document.createElement("input");
-
         const url = window.location.href;
-
         tempInput.value = url;
-
         document.body.appendChild(tempInput);
-
         tempInput.select();
-
         document.execCommand("copy");
-
         document.body.removeChild(tempInput);
 
         Swal.fire({
@@ -182,8 +172,11 @@ function Detail({ supabase }: any) {
                                 <div className="">
                                     <h3 className="font-bold text-3xl">{product.title}</h3>
                                     <div className="flex items-center gap-2">
-                                        <span className="text-[14px] font-normal">
-                                            <i className="fa-solid fa-star"></i> {product.rating}
+                                        <span className="text-[14px] font-normal flex items-center gap-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                            </svg>
+                                            {product.rating}
                                         </span>
                                         <span className="text-[14px] font-normal">Ulasan</span>
                                         <span className="text-[14px] font-normal">Brand: {product.brand}</span>
@@ -191,12 +184,15 @@ function Detail({ supabase }: any) {
                                 </div>
                                 <div className="flex items-center gap-4">
                                     <div className="flex items-center text-[14px] font-[500] gap-2 cursor-pointer" onClick={shareLink}>
-                                        <i className="fa-solid fa-arrow-up-from-bracket"></i>
-                                        <p className="underline">Bagikan</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                                            <path d="M13 4.5a2.5 2.5 0 11.702 1.737L6.97 9.604a2.518 2.518 0 010 .792l6.733 3.367a2.5 2.5 0 11-.671 1.341l-6.733-3.367a2.5 2.5 0 110-3.475l6.733-3.366A2.52 2.52 0 0113 4.5z" />
+                                        </svg>
+
+                                        <p className="underline">Share</p>
                                     </div>
                                     <div className="flex items-center text-[14px] font-[500] gap-2">
                                         <i className="fa-regular fa-heart"></i>
-                                        <p className="underline">Simpan</p>
+                                        <p className="underline">Save</p>
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +219,21 @@ function Detail({ supabase }: any) {
                             </div>
                             <div className="flex items-start md:justify-between md:gap-8 flex-col flex-grow p-4 md:p-0 mt-8">
                                 <div className="md:p-0 p-0 text-sm lg:text-base font-medium w-full">
-                                    <h3 className="font-bold text-3xl md:hidden">{product.title}</h3>
+                                    <h3 className="font-bold text-3xl md:hidden flex items-start justify-between">{product.title}
+                                        <div className="flex md:hidden px-4 items-center gap-4">
+                                            <div className="flex items-center text-[14px] font-[500] gap-2 cursor-pointer" onClick={shareLink}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                                                    <path d="M13 4.5a2.5 2.5 0 11.702 1.737L6.97 9.604a2.518 2.518 0 010 .792l6.733 3.367a2.5 2.5 0 11-.671 1.341l-6.733-3.367a2.5 2.5 0 110-3.475l6.733-3.366A2.52 2.52 0 0113 4.5z" />
+                                                </svg>
+
+                                                <p className="underline">Share</p>
+                                            </div>
+                                            <div className="flex items-center text-[14px] font-[500] gap-2">
+                                                <i className="fa-regular fa-heart"></i>
+                                                <p className="underline">Save</p>
+                                            </div>
+                                        </div>
+                                    </h3>
                                     <h3 className="font-semibold text-3xl md:block hidden">{product.title}</h3>
 
                                     <div className="bg-white rounded-lg md:p-4 mt-4">
@@ -238,7 +248,7 @@ function Detail({ supabase }: any) {
                                                     <span className="font-semibold">Brand:</span> {product.brand}
                                                 </p>
                                                 <p className="my-2">
-                                                    <span className="font-semibold">Kategori:</span> {product.category}
+                                                    <span className="font-semibold">Category:</span> <Link className='underline text-[#FF385C]' to={`/product/category/${product.category}`}>{product.category}</Link>
                                                 </p>
                                             </div>
                                             <div className="md:w-1/2">
@@ -254,32 +264,26 @@ function Detail({ supabase }: any) {
                                     </div>
                                 </div>
                                 <hr className="my-8 w-full block" />
-                                <div className="p-0 rounded w-full shrink-0">
-                                    <div className="rounded font-bold flex flex-col gap-4 md:gap-0">
-                                        <div className="md:p-2 flex flex-col gap-2">
+                                <div className="md:p-4 rounded w-full">
+                                    <div className="rounded bg-white shadow-lg py-4 md:p-6 flex flex-col gap-4 md:gap-6">
+                                        <div className="md:p-2">
+                                            <h3 className="text-2xl font-semibold">{product.title}</h3>
                                             <div className="flex items-center gap-2">
-                                                <h3 className="text-xl font-semibold">{product.title}</h3>
-                                                <span className="text-base text-gray-500">
-                                                    <i className="fa-solid fa-star text-[#FFD700]"></i> {product.rating}
+                                                <span className="text-lg text-gray-500 flex items-center gap-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                                                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                                                    </svg> {product.rating}
                                                 </span>
                                             </div>
-                                            <div className="flex items-center justify-between">
-                                                <p className="text-lg text-black/[0.8]">
-                                                    ${product.price}.00 / pcs
-                                                </p>
-                                                <p className="text-lg text-black/[0.8]">
-                                                    Stok: {product.stock} pcs
-                                                </p>
-                                            </div>
                                         </div>
-                                        <hr className="my-4 md:block hidden" />
+                                        <hr className="my-4" />
                                         <div className="flex flex-col gap-4">
-                                            <label htmlFor="quantity" className="text-lg font-semibold text-black/[0.8]">
+                                            <label htmlFor="quantity" className="text-lg font-semibold text-gray-800">
                                                 Quantity
                                             </label>
                                             <div className="flex items-center w-full md:w-auto">
                                                 <button
-                                                    className="text-2xl text-[#FF385C] cursor-pointer w-12 h-12 flex items-center justify-center bg-slate-800/[0.015] rounded-full"
+                                                    className="text-2xl text-[#FF385C] cursor-pointer w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full"
                                                     onClick={() => setQuantity(Math.max(quantity - 1, 1))}
                                                 >
                                                     -
@@ -288,24 +292,24 @@ function Detail({ supabase }: any) {
                                                     type="number"
                                                     min="1"
                                                     max={product.stock}
-                                                    className="text-center h-12 border-2 border-black/[0.1] rounded w-full"
+                                                    className="text-center h-12 border-2 border-gray-200 rounded w-full"
                                                     value={quantity}
                                                     onChange={handleQuantityChange}
                                                 />
                                                 <button
-                                                    className="text-2xl text-[#FF385C] cursor-pointer w-12 h-12 flex items-center justify-center bg-slate-800/[0.015] rounded-full"
+                                                    className="text-2xl text-[#FF385C] cursor-pointer w-12 h-12 flex items-center justify-center bg-gray-100 rounded-full"
                                                     onClick={() => setQuantity(Math.min(quantity + 1, product.stock))}
                                                 >
                                                     +
                                                 </button>
                                             </div>
                                         </div>
-                                        <hr className="my-4 md:block hidden" />
+                                        <hr className="my-4" />
                                         <div className="flex items-center justify-between flex-row p-2">
-                                            <p className="text-lg font-semibold text-black/[0.8]">
+                                            <p className="text-lg font-semibold text-gray-800">
                                                 ${product.price}.00 x {quantity}
                                             </p>
-                                            <p className="text-lg font-semibold text-black/[0.8]">
+                                            <p className="text-lg font-semibold text-gray-800">
                                                 ${totalPrice.toFixed(2)}
                                             </p>
                                         </div>
@@ -313,15 +317,16 @@ function Detail({ supabase }: any) {
                                             <p className="text-xl font-semibold">Total: $<span id="total">{totalPrice.toFixed(2)}</span></p>
                                         </div>
                                         <div className="flex items-center justify-center gap-4 flex-wrap">
-                                            <button onClick={addItem} className="text-base p-3 text-white bg-[#FF385C] border-2 border-[#FF385C] w-36 hover:bg-[#FF385C] hover:text-white transition duration-300 ease-in-out rounded">
+                                            <button onClick={addItem} className="text-base py-3 px-6 text-white bg-[#FF385C] hover:bg-[#FF1E54] transition duration-300 ease-in-out rounded">
                                                 <i className="fa-solid fa-cart-shopping mx-2"></i> Add to Cart
                                             </button>
-                                            <button className="text-base p-3 text-white bg-[#FF385C] border-2 border-[#FF385C] w-36 hover:bg-[#FF385C] hover:text-white transition duration-300 ease-in-out rounded">
+                                            <button className="text-base py-3 px-6 text-white bg-[#FF385C] hover:bg-[#FF1E54] transition duration-300 ease-in-out rounded">
                                                 Buy Now
                                             </button>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </section>
                         <section className="mx-0 sm:mx-4 mt-8">
