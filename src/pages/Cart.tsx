@@ -82,6 +82,11 @@ const Cart = ({ supabase }: any) => {
             setTotal(totalPrice);
             setIsLoading(false);
         }
+        else {
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 500);
+        }
     }, [product, listProduct]);
 
     const removeItem = (id: number) => {
@@ -140,7 +145,7 @@ const Cart = ({ supabase }: any) => {
                 <div className="w-full flex items-center justify-center text-center md:relative sticky top-0 left-0 w-full bg-white p-4 md:bg-transparent md:p-0">
                     <h4 className="font-[500] text-lg md:text-2xl flex justify-center md:justify-start items-center gap-2 relative md:text-left text-center w-full block">
                         Cart
-                        <p onClick={() => {history.back()}} className="cursor-pointer">
+                        <p onClick={() => { history.back() }} className="cursor-pointer">
                             <span className="absolute top-[50%] translate-y-[-50%] left-[10px] md:left-[-40px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -153,51 +158,70 @@ const Cart = ({ supabase }: any) => {
                     <div className="md:p-6 md:border-[1px] md:border-black/[0.1] rounded-lg flex flex-col gap-6 w-full mx-auto md:sticky top-[20px]">
                         <div className="flex flex-col gap-8">
                             <h4 className="font-[600] text-xl text-black/[0.8] text-left">Order Details & Price Breakdown</h4>
-                            {isLoading ? (
+
+                            {/* Display loading skeleton while data is being fetched */}
+                            {isLoading && (
                                 <LoadingSkeleton />
-                            ) : (
-                                product.map((item: any) => {
-                                    const itemList: any = listProduct.find((result: any) => result.id === item.id_product);
+                            )}
 
-                                    if (!itemList) {
-                                        return null;
-                                    }
+                            {/* Check if there are products in the cart */}
+                            {product.length > 0 ? (
+                                // Display order details when products exist
+                                <>
+                                    {product.map((item: any) => {
+                                        const itemList: any = listProduct.find((result: any) => result.id === item.id_product);
 
-                                    return (
-                                        <div key={item.id_product} className="flex items-start justify-between relative">
-                                            <div className="flex gap-2">
-                                                <div className="mx-4">
-                                                    <input type="checkbox" className="scale-[1.4]" />
+                                        if (!itemList) {
+                                            return null;
+                                        }
+
+                                        return (
+                                            <div key={item.id_product} className="flex items-start justify-between relative">
+                                                <div className="flex gap-2">
+                                                    <div className="mx-4">
+                                                        <input type="checkbox" className="scale-[1.4]" />
+                                                    </div>
+                                                    <div className="">
+                                                        <img src={itemList.thumbnail} alt={itemList.title} className="w-[100px] h-[90px] object-cover object-top" />
+                                                    </div>
+                                                    <div className="flex flex-col justify-between">
+                                                        <h4 className="font-bold text-[16px]">{itemList.title}</h4>
+                                                        <p className="font-[500] text-[15px]">${itemList.price}.00 x {item.quantity}</p>
+                                                    </div>
                                                 </div>
-                                                <div className="">
-                                                    <img src={itemList.thumbnail} alt={itemList.title} className="w-[100px] h-[90px] object-cover object-top" />
-                                                </div>
-                                                <div className="flex flex-col justify-between">
-                                                    <h4 className="font-bold text-[16px]">{itemList.title}</h4>
-                                                    <p className="font-[500] text-[15px]">${itemList.price}.00 x {item.quantity}</p>
-                                                </div>
+                                                <p className="font-[500] text-[15px] whitespace-nowrap">${parseInt(itemList.price) * parseInt(item.quantity)}.00</p>
+                                                <p className="absolute bottom-0 right-[0px] font-[500] text-[16px] underline text-red-500 cursor-pointer" onClick={() => {
+                                                    removeItem(item.id)
+                                                }}>
+                                                    Remove
+                                                </p>
                                             </div>
-                                            <p className="font-[500] text-[15px] whitespace-nowrap">${parseInt(itemList.price) * parseInt(item.quantity)}.00</p>
-                                            <p className="absolute bottom-0 right-[0px] font-[500] text-[16px] underline text-red-500 cursor-pointer" onClick={() => {
-                                                removeItem(item.id)
-                                            }}>
-                                                Remove
-                                            </p>
+                                        );
+                                    })}
+                                    <hr />
+                                    <div className="font-[13px] font-[600] flex items-center justify-between text-black/[0.8]">
+                                        <h4>Total (<span className="underline">USD</span>)</h4>
+                                        <p>${total}.00</p>
+                                    </div>
+                                    <button className="bg-gradient-to-r from-[#E92153] to-[#DE105E] w-full p-3 px-6 rounded-md text-white text-center text-[15px] font-bold">
+                                        Cart
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                {!isLoading && product.length === 0 && (
+                                    (
+                                        <div className="flex flex-col items-center justify-center h-full">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M10 1a.8.8.0 00-.8.8v3.4l-.6.6H4a1 1 0 00-.9 1.45l5.7 11.3a1 1 0 001.8 0l5.7-11.3A1 1 0 0016 6H11.4l-.6-.6V1.8a.8.8 0 00-.8-.8zM10 3a.2.2 0 01.2.2v8.6l-.2.2H6a.5.5 0 00-.45.67L10 18l4.45-5.13a.5.5 0 00-.45-.67H10l-.2-.2V3.2a.2.2 0 01.2-.2zM7 8a1 1 0 112 0 1 1 0 01-2 0zm5 0a1 1 0 112 0 1 1 0 01-2 0z" clipRule="evenodd" />
+                                            </svg>
+                                            <p className="text-gray-600 text-lg mt-4">No items yet</p>
                                         </div>
-                                    );
-                                })
+                                            )
+                                )}
+                                </>
                             )}
                         </div>
-                        <hr />
-                        <div>
-                            <div className="font-[13px] font-[600] flex items-center justify-between text-black/[0.8]">
-                                <h4>Total (<span className="underline">USD</span>)</h4>
-                                <p>${total}.00</p>
-                            </div>
-                        </div>
-                        <button className="bg-gradient-to-r from-[#E92153] to-[#DE105E] w-full p-3 px-6 rounded-md text-white text-center text-[15px] font-bold">
-                            Cart
-                        </button>
                     </div>
                 </div>
             </div>
