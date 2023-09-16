@@ -17,7 +17,7 @@ const apiKey = REACT_APP_SUPABASE_KEY || "";
 
 function App() {
   return (
-    <HashRouter basename="/">
+    <HashRouter>
       <Router>
         <AppContent />
       </Router>
