@@ -74,7 +74,7 @@ function Middle({ supabase }: any) {
                             </form>
                             <Link to="`/search/${search}?q${search}`">
                                 <div
-                                    className="w-[35px] h-[35px] text-white rounded-full bg-[#FF385C] flex items-center justify-center p-2 absolute top-[50%] right-[10px] translate-y-[-50%]">
+                                    className="w-[35px] h-[35px] text-white rounded-full bg-[#9333ea] flex items-center justify-center p-2 absolute top-[50%] right-[10px] translate-y-[-50%]">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                         className="w-12 h-12">
                                         <path fill-rule="evenodd"
@@ -90,7 +90,7 @@ function Middle({ supabase }: any) {
                     <Link to="/cart">
                         <div className="flex items-center relative">
                             <div
-                                className="text-[13px] cursor-pointer bg-[#FF385C] text-white w-[25px] h-[25px] flex items-center justify-center absolute top-[-10px] right-[-10px] rounded-full">
+                                className="text-[13px] cursor-pointer bg-[#9333ea] text-white w-[25px] h-[25px] flex items-center justify-center absolute top-[-10px] right-[-10px] rounded-full">
                                 <p>?</p>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

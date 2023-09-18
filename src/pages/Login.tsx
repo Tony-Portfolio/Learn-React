@@ -28,14 +28,13 @@ const Login = ({ supabase }: any) => {
             });
 
             if (error) {
-                setError('Incorrect username or password'); // Set the error message
+                setError('Incorrect username or password');
                 return;
             }
             else{
                 console.log(data);
             }
 
-            // Reset the error message on successful login
             setError('');
 
             Swal.fire({
@@ -101,7 +100,7 @@ const Login = ({ supabase }: any) => {
                         <div>
                             <button
                                 type="submit"
-                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#FF385C] hover:bg-[#e42c4d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#e42c4d]"
+                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#9333ea] hover:bg-[#7e22ce] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7e22ce]"
                             >
                                 Log in
                             </button>
@@ -112,7 +111,7 @@ const Login = ({ supabase }: any) => {
                     <p className="text-sm text-gray-500">
                         Don't have an account?{' '}
                         <Link to="/register">
-                            <span className="text-[#FF385C] hover:underline cursor-pointer">
+                            <span className="text-[#9333ea] hover:underline cursor-pointer">
                                 Register now!
                             </span>
                         </Link>

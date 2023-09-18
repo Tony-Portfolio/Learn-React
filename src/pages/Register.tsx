@@ -53,10 +53,8 @@ const Register = ({ supabase }: any) => {
                     showConfirmButton: false,
                     footer: '<a href="https://mail.google.com/mail/u/0/" target="_blank" style="text-decoration:underline" class="text-indigo-600">Open your email</a> to complete the registration process.'
                 });
-                // Redirect or perform other actions upon successful registration
             }
         } catch (error: any) {
-            // Handle any unexpected errors
             console.error('Unexpected Error:', error.message);
         }
     };
@@ -101,7 +99,7 @@ const Register = ({ supabase }: any) => {
                         <div>
                             <button
                                 type="submit"
-                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#FF385C] hover:bg-[#e42c4d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#e42c4d]"
+                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#9333ea] hover:bg-[#7e22ce] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7e22ce]"
                             >
                                 Register
                             </button>
@@ -111,7 +109,7 @@ const Register = ({ supabase }: any) => {
                 <div className="bg-gray-50 px-6 py-4">
                     <p className="text-sm text-gray-500">
                         Already have an account?{' '}
-                        <Link to="/login" className="text-[#FF385C] hover:underline">
+                        <Link to="/login" className="text-[#9333ea] hover:underline">
                             Log in here
                         </Link>
                     </p>

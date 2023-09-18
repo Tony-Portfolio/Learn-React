@@ -16,22 +16,20 @@ interface Product {
 }
 
 function Item({ product }: { product: Product }) {
-    const [isLoading, setIsLoading] = useState(true); // Add isLoading state
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Simulate loading by adding a delay
         const delay = setTimeout(() => {
             setIsLoading(false);
         }, 1000);
 
-        return () => clearTimeout(delay); // Cleanup the timeout on unmount
+        return () => clearTimeout(delay);
     }, []);
 
     return (
         <Link to={`/product/${product.id}`}>
             <div className={`text-sm ${isLoading ? 'animate-pulse' : ''}`}>
                 {isLoading ? (
-                    // Render loading skeleton here
                     <>
                         <div className="bg-gray-300 h-[200px] w-full object-cover rounded mb-2"></div>
                         <div className="bg-gray-300 h-5 w-2/3 rounded mb-1"></div>
@@ -40,14 +38,13 @@ function Item({ product }: { product: Product }) {
                         <div className="bg-gray-300 h-5 w-1/4 rounded"></div>
                     </>
                 ) : (
-                    // Render product details when data is loaded
                     <>
                         <img className="h-[200px] w-full object-cover rounded mb-2" src={product.thumbnail} alt={product.title} loading="lazy" />
                         <h2 className="font-bold text-base">{product.title}</h2>
                         <p className="text-black/80 font-medium my-2">{product.description}</p>
                         <p>Brand: {product.brand}</p>
                         <p>Stok: {product.stock}</p>
-                        <p className="mt-2">${product.price}.00</p>
+                        <p className="mt-2">${product.price.toLocaleString()}.00</p>
                     </>
                 )}
             </div>

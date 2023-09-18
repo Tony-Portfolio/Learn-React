@@ -5,31 +5,29 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.1); /* Black with opacity 0.1 */
-    z-index: 999; /* Place the overlay above other content */
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 999;
 }
 
-/* Loading container styles */
 .loading-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
-    /* Add your loading animation styles here */
+    height: 100vh;
 }
 
 
 .ball {
     width: 20px;
     height: 20px;
-    background-color: #ffffff; /* White balls */
+    background-color: #ffffff;
     border-radius: 50%;
     margin: 0 10px;
-    animation-duration: 1s; /* Adjust the animation duration */
+    animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-    position: relative; /* Added to allow z-index */
-    z-index: 1; /* Ensure balls are above the background */
+    position: relative;
+    z-index: 1;
 }
 
 .ball::before {
@@ -39,9 +37,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: inherit;
-    z-index: -1; /* Place the background behind the balls */
+    z-index: -1;
 }
 
 .ball1 {
@@ -51,12 +49,12 @@
 
 .ball2 {
     animation-name: bounce2;
-    animation-delay: 0.2s; /* Delay the animation by 0.2 seconds */
+    animation-delay: 0.2s;
 }
 
 .ball3 {
     animation-name: bounce3;
-    animation-delay: 0.4s; /* Delay the animation by 0.4 seconds */
+    animation-delay: 0.4s;
 }
 
 @keyframes bounce1 {
@@ -64,7 +62,7 @@
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-20px); /* Adjust the bounce height */
+        transform: translateY(-20px);
     }
 }
 

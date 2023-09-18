@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import Item from '../components/Item';
 
-// Define an interface for the product data
 interface Product {
     id: number;
     title: string;
