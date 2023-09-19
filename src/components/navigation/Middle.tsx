@@ -70,7 +70,7 @@ function Middle({ supabase }: any) {
             <div className="flex items-center justify-between py-4 gap-4">
                 <div className="md:block hidden">
                     <Link to="/">
-                        <img src="/Shopify_logo.svg" alt="" className="w-[100px] shrink" />
+                        <img src="/logo3.jpg" alt="" className="w-[100px] shrink object-cover" />
                     </Link>
                 </div>
                 <div className="flex-1 md:flex-none">
