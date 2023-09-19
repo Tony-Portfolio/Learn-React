@@ -113,6 +113,7 @@ const Checkout = ({ supabase }: any) => {
             });
         }
     }
+    console.log("DATA LOCAL : ", localStorage.getItem("dataCheckout"));
 
     const handleFormSubmission = async (event: any) => {
         event.preventDefault();
@@ -143,18 +144,18 @@ const Checkout = ({ supabase }: any) => {
             ])
             .select()
 
-        if(data){
+        if (data) {
             Swal.fire({
-                icon:"success",
-                text:"success, your item will be delivered soon",
-                showConfirmButton:false,
-                timer:3000,
-                willClose:() => {
+                icon: "success",
+                text: "success, your item will be delivered soon",
+                showConfirmButton: false,
+                timer: 3000,
+                willClose: () => {
                     navigate("/");
                 }
             })
         }
-        if(errorInsert) return;
+        if (errorInsert) return;
         console.log(itemId, formData)
     }
 
@@ -165,7 +166,14 @@ const Checkout = ({ supabase }: any) => {
             <div className="flex flex-col md:flex-row justify-between min-h-[80vh] w-full md:w-11/12 mx-auto">
                 {/* Left side - Cart items */}
                 <div className="w-full md:w-6/12 bg-white rounded-lg p-4 md:p-6">
-                    <h2 className="text-xl md:text-2xl font-semibold mb-4">Your Items</h2>
+                    <h2 className="text-xl md:text-2xl font-semibold mb-4 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5" onClick={() => {
+                            window.history.back()
+                        }}>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        </svg>
+
+                        Your Items</h2>
                     {cartItems.length === 0 ? (
                         <p className="text-gray-600">Your cart is empty.</p>
                     ) : (

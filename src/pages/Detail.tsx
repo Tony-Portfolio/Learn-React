@@ -95,7 +95,7 @@ function Detail({ supabase }: any) {
 
                 const { data, error: updateError } = await supabase
                     .from('cart')
-                    .update({ quantity: newQuantity })
+                    .update({ quantity: newQuantity + existingData.quantity })
                     .eq('id', existingId)
                     .select();
 
@@ -104,32 +104,41 @@ function Detail({ supabase }: any) {
                     return;
                 } else {
                     console.log(data);
+                    console.log("DATA : ", existingId);
 
                     dataCheckout[0].id = existingId;
-                    dataCheckout[0].quantity = newQuantity;
+                    dataCheckout[0].quantity = newQuantity + quantity;
                 }
             } else {
                 console.log("yay");
-                const { error: insertError, data: insertedData } = await supabase
+                const { data: insertedData, error: insertError } = await supabase
                     .from('cart')
-                    .insert([submissionData]);
+                    .insert([submissionData])
+                    .select();
+
+                console.log("WHY YAY : ", insertedData)
 
                 if (insertError) {
+                    console.log("Yay 1");
                     console.error('Error inserting new data:', insertError.message);
                     return;
-                } 
-                if(insertedData) {
-                    const { data: dataSelect2, error: updateError } = await supabase
+                }
+                if (insertedData) {
+                    console.log("Yay 2");
+                    const { data: dataSelect2, error: selectError } = await supabase
                         .from('cart')
                         .select('id, id_product, quantity')
                         .eq('email', user.email)
                         .eq('id_product', parseInt(product.id))
                         .single();
-                    if(updateError) return;
-                    // const existingQuantity = dataSelect2.quantity;
+
+                    if (selectError) return;
+                    console.log("DATANYA : ", dataSelect2);
                     const newQuantity: number = quantity;
                     dataCheckout[0].id = dataSelect2.id;
                     dataCheckout[0].quantity = newQuantity;
+                    // const existingQuantity = dataSelect2.quantity;
+
                 }
             }
 
@@ -297,14 +306,14 @@ function Detail({ supabase }: any) {
                                         <hr className="my-4" />
                                         <div className="flex items-center justify-between flex-row p-2">
                                             <p className="text-lg font-medium text-gray-800">
-                                                ${product.price.toLocaleString()}.00 x {quantity}
+                                                ${product.price?.toLocaleString()}.00 x {quantity}
                                             </p>
                                             {/* <p className="text-lg font-medium text-gray-800">
-                                                ${totalPrice.toLocaleString()}.00
+                                                ${totalPrice?.toLocaleString()}.00
                                             </p> */}
                                         </div>
                                         <div className="flex items-center flex-row my-2 p-2">
-                                            <p className="text-xl font-medium">Total: $<span id="total">{totalPrice.toLocaleString()}.00</span></p>
+                                            <p className="text-xl font-medium">Total: $<span id="total">{totalPrice?.toLocaleString()}.00</span></p>
                                         </div>
                                         <div className="flex items-center justify-center gap-4 flex-wrap">
                                             <button onClick={() => {

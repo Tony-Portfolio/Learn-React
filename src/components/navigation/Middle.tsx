@@ -45,7 +45,7 @@ function Middle({ supabase }: any) {
                     timer: 3000,
                     willClose: async () => {
                         let { error } = await supabase.auth.signOut();
-                        if(error){}
+                        if (error) { }
                         navigate("/");
                     }
                 }
@@ -54,38 +54,57 @@ function Middle({ supabase }: any) {
         })
     }
 
+    const [search, setSearch] = useState('');
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        if (search.trim() !== '') {
+            navigate(`/product/search/${search}`);
+        }
+    };
+
 
 
     return (
         <div className="w-11/12 mx-auto flex flex-col gap-4">
             <div className="flex items-center justify-between py-4 gap-4">
-                <div className="">
+                <div className="md:block hidden">
                     <Link to="/">
                         <img src="/Shopify_logo.svg" alt="" className="w-[100px] shrink" />
                     </Link>
                 </div>
-                {/* <div className="flex-1 md:flex-none">
+                <div className="flex-1 md:flex-none">
                     <div className="w-full">
                         <div className="relative">
-                            <form>
-                                <input type="text" placeholder="search product"
-                                    className="flex border-2 border-black/[0.1] shadow-lg py-3 px-4 pr-14 rounded-full text-[14px] font-[500] block md:w-[350px] w-full lg:focus:w-[450px]"
-                                    name="q" />
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    type="text"
+                                    placeholder="Search product"
+                                    className="flex border-2 border-black/[0.1] shadow-lg py-3 px-4 pr-14 rounded-full text-[14px] font-[500] md:w-[350px] w-full outline-black/20"
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
                             </form>
-                            <Link to="`/search/${search}?q${search}`">
-                                <div
-                                    className="w-[35px] h-[35px] text-white rounded-full bg-[#9333ea] flex items-center justify-center p-2 absolute top-[50%] right-[10px] translate-y-[-50%]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        className="w-12 h-12">
-                                        <path fill-rule="evenodd"
-                                            d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </Link>
+                            <div
+                                className="w-[35px] h-[35px] text-white rounded-full bg-[#9333ea] flex items-center justify-center p-2 absolute top-[50%] right-[10px] translate-y-[-50%] cursor-pointer"
+                                onClick={handleSubmit} // Handle the click event for redirection
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    className="w-12 h-12"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                </div> */}
+                </div>
                 <div className="items-center gap-4 justify-end flex">
                     <Link to="/cart">
                         <div className="flex items-center relative">
@@ -124,8 +143,8 @@ function Middle({ supabase }: any) {
                                     <p className="hover:bg-black/[0.03] py-3 text-[15px] px-4 cursor-pointer">Profile</p>
                                 </Link> */}
                                 {/* <hr /> */}
-                                <Link to="/cart" onClick={toggleMenu}>
-                                    <p className="hover:bg-black/[0.03] py-3 text-[15px] px-4 cursor-pointer">Cart</p>
+                                <Link to="/shipping" onClick={toggleMenu}>
+                                    <p className="hover:bg-black/[0.03] py-3 text-[15px] px-4 cursor-pointer">Order History</p>
                                 </Link>
                                 <hr />
                                 <p onClick={() => {

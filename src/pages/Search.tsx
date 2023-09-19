@@ -11,17 +11,17 @@ interface Product {
     rating: number;
     stock: number;
     brand: string;
-    category: string;
+    Search: string;
     thumbnail: string;
     images: string[];
 }
 
-function Category() {
-    const [products, setProducts] = useState<Product | any>([]);
+function Search() {
+    const [products, setProducts] = useState<Product[]>([]);
     const { id } = useParams();
 
     useEffect(() => {
-        fetch('https://dummyjson.com/products/category/' + id)
+        fetch('https://dummyjson.com/products/search?q=' + id)
             .then((response) => response.json())
             .then((data) => {
                 setProducts(data.products);
@@ -32,12 +32,16 @@ function Category() {
     }, [id]);
 
     return (
-        <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-20 mt-4">
-            {products.map((product: any) => (
-                <Item product={product} key={product.id}/>
-            ))}
+        <div className="w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-20 min-h-[80vh] mt-4">
+            {products.length === 0 ? (
+                <p>No results found for "{id}"</p>
+            ) : (
+                products.map((product: any) => (
+                    <Item product={product} key={product.id} />
+                ))
+            )}
         </div>
     );
 }
 
-export default Category;
+export default Search;

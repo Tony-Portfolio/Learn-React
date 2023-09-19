@@ -10,6 +10,8 @@ import Register from './pages/Register';
 import Cart from './pages/Cart';
 import Footer from "./components/Footer";
 import Checkout from "./pages/Checkout";
+import Shipping from "./pages/Shipping";
+import Search from "./pages/Search";
 
 const REACT_APP_SUPABASE_URL = "https://vnuqwzaoqxrmtfpumnhy.supabase.co";
 const REACT_APP_SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZudXF3emFvcXhybXRmcHVtbmh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTMwMjA5OTYsImV4cCI6MjAwODU5Njk5Nn0.Z3EAQypKZg-MTjLbTuQKF6Q_DZeVMGo_WPTQtQ9dAIY";
@@ -61,16 +63,18 @@ function AppContent() {
         <>
             {renderNavigation && <Navigation supabase={supabase} />}
             <Routes>
-                <Route path="/" element={<Index />} />
+                <Route path="/" element={<Index supabase={supabase} />} />
                 <Route path="/product/:id" element={<Detail supabase={supabase} />} />
                 <Route path="/product/category/:id" element={<Category />} />
+                <Route path="/product/search/:id" element={<Search />} />
                 <Route path="/login" element={<Login supabase={supabase} />}></Route>
                 <Route path="/register" element={<Register supabase={supabase} />}></Route>
                 <Route path="/cart" element={<Cart supabase={supabase} />}></Route>
                 <Route path="/checkout" element={<Checkout supabase={supabase} />}></Route>
                 <Route path="/*" element={<Navigate to="/" />}></Route>
+                <Route path="/shipping" element={<Shipping supabase={supabase}/>}></Route>
             </Routes>
-            <Footer />
+            {renderNavigation && <Footer />}
         </>
     );
 }
